@@ -1,5 +1,5 @@
 <main>
-  <p id="notice"></p>
+  <p id="notice"><%= flash[:notice] %></p>
   <div class='container'>
     <div class='row'>
       <%= render 'components/left', user: @book.user, book: @new_book %>
@@ -17,7 +17,7 @@
               <%= link_to @book.title, @book %>
             </td>
             <td><%= @book.body %></td>
-            <% if @book.user == current_user %>
+            <% if @book.user === current_user %>
             <td>
               <%= link_to 'Edit', edit_book_path(@book), class: 'btn btn-sm btn-success' %>
             </td>
