@@ -1,8 +1,10 @@
 class BooksController < ApplicationController
+  
   def index
     @books = Book.all
     @user = current_user
     @new_book = Book.new
+    @errors = flash[:errors] || []
   end
 
   def create
@@ -12,7 +14,7 @@ class BooksController < ApplicationController
     if @book.save
       redirect_to @book, notice: 'You have created book successfully.'
     else
-      redirect_to (books_path)
+      redirect_to books_path, flash: { errors: @book.errors.full_messages }
     end
   end  
 
